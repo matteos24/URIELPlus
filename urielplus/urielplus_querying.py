@@ -180,9 +180,9 @@ class URIELPlusQuerying(BaseURIEL):
                 logging.error(f"Unknown language: {lang}.")
                 sys.exit(1)
 
-
         vectors = {}
-        for lang_idx in range(len(langs)):
+        for lang in range(len(langs)):
+            lang_idx = np.where(self.langs[loaded_features_idx] == langs[lang])[0][0]
             vector = []
             for feat_idx in range(len(self.feats[loaded_features_idx])):
                 featIsMorphological = ((self.feats[loaded_features_idx][feat_idx]).startswith("M_"))
@@ -190,7 +190,7 @@ class URIELPlusQuerying(BaseURIEL):
                 featIsPhonological = ((self.feats[loaded_features_idx][feat_idx]).startswith("P_"))
                 featIsSyntactic = ((self.feats[loaded_features_idx][feat_idx]).startswith("S_"))
                 if category in ["genetic", "featural", "geographic"] or (category == "morphological" and featIsMorphological) or (category == "inventory" and featIsInventory) or (category == "phonological" and featIsPhonological) or (category == "syntactic" and featIsSyntactic):
-                    feat_data = self.data[loaded_features_idx][feat_idx]
+                    feat_data = self.data[loaded_features_idx][lang_idx][feat_idx]
                     if len(feat_data) == 1:
                         vector.extend(feat_data)
                     elif self.aggregation == 'U':
@@ -201,7 +201,7 @@ class URIELPlusQuerying(BaseURIEL):
                         else:
                             known_data = feat_data[feat_data != -1.0]
                             vector.append(np.mean(known_data) if known_data.size > 0 else 0.0)
-            vectors[langs[lang_idx]] = vector
+            vectors[langs[lang]] = vector
         return vectors
    
     """
