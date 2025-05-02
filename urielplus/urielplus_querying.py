@@ -166,9 +166,6 @@ class URIELPlusQuerying(BaseURIEL):
             Logging:
                 Error: Logs error if only one language is provided or if the language is unknown.
         """
-        if len(args) == 1 and not isinstance(args[0],list):
-            logging.error("You only provided one language argument.\nProvide multiple language arguments, or a single list of languages as arguments.")
-            sys.exit(1)
         if len(args) == 1 and isinstance(args[0],list):
             langs = args[0]
         else:
