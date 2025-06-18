@@ -643,3 +643,45 @@ class URIELPlusDatabases(BaseURIEL):
                 sys.exit(1)
            
         logging.info("Custom databases integration complete.")
+
+    def import_csv(self, file_path, idx=1):
+        """
+            Imports data from a CSV file path. This will replace all existing data in the specified index.
+
+
+            Args:
+                file_path (str): The path to the .csv file containing URIEL+ data.
+                idx (int): The index of the data array to import into. 0 = genetic, 1 = typological, 2 = geographic.
+
+
+            Logging:
+                Error: Logs an error if the file does not exist or is not valid.
+        """
+        logging.info(f"Importing URIEL+ data from {file_path}...")
+        if not os.path.exists(file_path):
+            logging.error(f"File {file_path} does not exist.")
+            sys.exit(1)
+        if not self.data[idx].ndim == 3:
+            logging.error("Data array is not 3-dimensional.")
+            sys.exit(1)
+        if not self.data[idx].shape[-1] == 1:
+            logging.info('Caution: Data array currently contains > 1 source dimension, all of which will be lost.')
+
+        try:
+            df = pd.read_csv(file_path, index_col=0)
+        except Exception as e:
+            logging.error(f"Error importing URIEL+ data from {file_path}: {e}")
+            sys.exit(1)
+
+        if self.codes == 'Iso' and any(not self.is_iso_code(lang) for lang in df.index):
+            logging.error('Language codes in the CSV file are not all in ISO 639-3 format.')
+            sys.exit(1)
+        if self.codes == 'Glotto' and any(not self.is_glottocode(lang) for lang in df.index):
+            logging.error('Language codes in the CSV file are not all in Glottocode format.')
+            sys.exit(1)
+
+        self.feats[idx] = df.columns.to_numpy()
+        self.langs[idx] = df.index.to_numpy()
+        self.data[idx] = df.values
+        self.data[idx] = np.expand_dims(self.data[idx], axis=-1)
+        self.sources[idx] = np.array(["CSV_IMPORTED"])
