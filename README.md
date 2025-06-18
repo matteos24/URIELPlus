@@ -127,9 +127,14 @@ Python 3.10 or later. If you're working with the `MIDASpy` extra dependencies, v
     ```python
     u.reset()
     ```
++ Import (and replace all existing) data from a custom CSV file:
+  ```python
+    u.import_csv({file_path}, {index})
+    ```
 
 + Replace `{database}` with `saphon`, `bdproto`, `grambank`, `apics`, or `ewave`.
 + Replace `{databases}` with arguments `"UPDATED_SAPHON"`, `"BDPROTO"`, `"GRAMBANK"`, `"APICS"`, and/or `"EWAVE"` (e.g., `"UPDATED_SAPHON"`, `"BDPROTO"`, `"EWAVE"`).
++ Replace `{index}` with `0` for genetic data, `1` for typological data, or `2` for geographic data.
 
 ## Imputation Examples
 
