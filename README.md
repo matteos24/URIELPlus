@@ -1,10 +1,46 @@
-# [URIEL+: Enhancing Linguistic Inclusion and Usability in a Typological and Multilingual Knowledge Base](https://arxiv.org/abs/2409.18472)
+# [URIEL+: Enhancing Linguistic Inclusion and Usability in a Typological and Multilingual Knowledge Base](https://aclanthology.org/2025.coling-main.463/)
 
 ![knowledge base for natural language processing](./logo.png)
 
 URIEL is a knowledge base offering geographical, phylogenetic, and typological vector representations for 7970 languages. It includes distance measures between these vectors for 4005 languages, which are accessible via the lang2vec tool. Despite being frequently cited, URIEL is limited in terms of linguistic inclusion and overall usability. To tackle these challenges, we introduce URIEL+, an enhanced version of URIEL and lang2vec addressing these limitations. In addition to expanding typological feature coverage for 2898 languages, URIEL+ improves user experience with robust, customizable distance calculations to better suit the needs of the users. These upgrades also offer competitive performance on downstream tasks and provide distances that better align with linguistic distance studies.
 
-If you are interested for more information, check out our [full paper](https://arxiv.org/abs/2409.18472).
+If you are interested for more information, check out our [full paper](https://aclanthology.org/2025.coling-main.463/).
+
+## Citation
+
+<u>If you use this code for your research, please cite the following work:</u>
+
+```bibtex
+@inproceedings{khan-etal-2025-uriel,
+    title = "{URIEL}+: Enhancing Linguistic Inclusion and Usability in a Typological and Multilingual Knowledge Base",
+    author = {Khan, Aditya  and
+      Shipton, Mason  and
+      Anugraha, David  and
+      Duan, Kaiyao  and
+      Hoang, Phuong H.  and
+      Khiu, Eric  and
+      Do{\u{g}}ru{\"o}z, A. Seza  and
+      Lee, En-Shiun Annie},
+    editor = "Rambow, Owen  and
+      Wanner, Leo  and
+      Apidianaki, Marianna  and
+      Al-Khalifa, Hend  and
+      Eugenio, Barbara Di  and
+      Schockaert, Steven",
+    booktitle = "Proceedings of the 31st International Conference on Computational Linguistics",
+    month = jan,
+    year = "2025",
+    address = "Abu Dhabi, UAE",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.coling-main.463/",
+    pages = "6937--6952",
+    abstract = "URIEL is a knowledge base offering geographical, phylogenetic, and typological vector representations for 7970 languages. It includes distance measures between these vectors for 4005 languages, which are accessible via the lang2vec tool. Despite being frequently cited, URIEL is limited in terms of linguistic inclusion and overall usability. To tackle these challenges, we introduce URIEL+, an enhanced version of URIEL and lang2vec that addresses these limitations. In addition to expanding typological feature coverage for 2898 languages, URIEL+ improves the user experience with robust, customizable distance calculations to better suit the needs of users. These upgrades also offer competitive performance on downstream tasks and provide distances that better align with linguistic distance studies."
+}
+```
+
+If you have any questions, you can open a [GitHub Issue](https://github.com/Lee-Language-Lab/URIELPlus/issues) or send us an [email](mailto:masonshipton25@gmail.com).
+
+Check out ExploRIEL, our online UI for URIEL+: https://uriel-leelab.streamlit.app/ 
 
 ## Contents
 
@@ -15,7 +51,6 @@ If you are interested for more information, check out our [full paper](https://a
 + [Database Integration Examples](#database-integration-examples)
 + [Imputation Examples](#imputation-examples)
 + [Language Distance Calculation Examples](#language-distance-calculation-examples)
-+ [Citation](#citation)
 
 ## Environment
 
@@ -144,18 +179,3 @@ Python 3.10 or later. If you're working with the `MIDASpy` extra dependencies, v
 + Replace `{languages}`, `{language 1}`, and `{language 2}` with language codes (e.g., `"stan1293"`, `"hind1269"`).
 + Replace `{source}` with one database (e.g., `"WALS"`) or all databases (`'A'`).
 + Note: the default `{source}` is all databases.
-
-## Citation
-
-<u>If you use this code for your research, please cite the following work:</u>
-
-```bibtex
-@article{khan2024urielplus,
-  title={URIEL+: Enhancing Linguistic Inclusion and Usability in a Typological and Multilingual Knowledge Base},
-  author={Khan, Aditya and Shipton, Mason and Anugraha, David and Duan, Kaiyao and Hoang, Phuong H. and Khiu, Eric and Doğruöz, A. Seza and Lee, En-Shiun Annie},
-  journal={arXiv preprint arXiv:2409.18472},
-  year={2024}
-}
-```
-
-If you have any questions, you can open a [GitHub Issue](https://github.com/Masonshipton25/URIELPlus/issues) or send us an [email](mailto:masonshipton25@gmail.com).
