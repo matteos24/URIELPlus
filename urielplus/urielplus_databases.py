@@ -685,3 +685,17 @@ class URIELPlusDatabases(BaseURIEL):
         self.data[idx] = df.values
         self.data[idx] = np.expand_dims(self.data[idx], axis=-1)
         self.sources[idx] = np.array(["CSV_IMPORTED"])
+    
+
+    def integrate_ethnologue_geo(self, merged_csv="database/urielplus_csvs/language_country_merged_data.csv"):
+        from .geo_wasserstein import build_distributions
+        logging.error("RUNNING INTEGRATE")
+        path = os.path.join(self.cur_dir, merged_csv)
+        df = pd.read_csv(path)
+        # ensure the 4 necessary columns exist
+        expected = {"ISO_639","Centroid_Lon","Centroid_Lat","weight"}
+        if not expected.issubset(df.columns):
+            missing = expected - set(df.columns)
+            raise ValueError(f"language_country_merged_data.csv is missing columns: {missing}")
+
+        self.geo_distributions = build_distributions(df)

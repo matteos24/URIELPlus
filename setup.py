@@ -32,6 +32,8 @@ setup(
         "fancyimpute>=0.7.0",
         "joblib>=1.4.2",
         "setuptools>=68.2.0",
+        "pyproj>=3.7.1",
+        "POT>=0.8.0",
     ],
     extras_require={
         "midaspy": [

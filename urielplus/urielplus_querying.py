@@ -16,6 +16,8 @@ from .database.urielplus_csvs.resource_level_langs import (
     low_resource_languages_URIELPlus,
 )
 
+from .geo_wasserstein import w1_distance_language, normalized_w1_distance
+
 
 class URIELPlusQuerying(BaseURIEL):
     def __init__(self, feats, langs, data, sources):
@@ -408,6 +410,32 @@ class URIELPlusQuerying(BaseURIEL):
             dist_start_time = time.time()
 
 
+            if dist == "geographic_w1":
+                if len(langs) != 2:
+                    logging.error("`geographic_w1` requires exactly two languages.")
+                    sys.exit(1)
+                if not hasattr(self.databases, "geo_distributions"):
+                    logging.error("Call integrate_ethnologue_geo() first!")
+                    sys.exit(1)
+                iso1, iso2 = langs
+                d = w1_distance_language(iso1, iso2, self.databases.geo_distributions)
+                logging.info(f"[Wasserstein] {iso1}–{iso2} = {d:.3f}")
+
+                return d
+
+            if dist == "geographic_w1_normalized":
+                if len(langs) != 2:
+                    logging.error("`geographic_w1_normalized` requires exactly two languages.")
+                    sys.exit(1)
+                if not hasattr(self.databases, "geo_distributions"):
+                    logging.error("Call integrate_ethnologue_geo() first!")
+                    sys.exit(1)
+                iso1, iso2 = langs
+                d = normalized_w1_distance(iso1, iso2, self.databases.geo_distributions)
+                logging.info(f"[Wasserstein‐norm] {iso1}–{iso2} = {d:.3f}")
+                return d
+            
+            
             loaded_features_idx = self.map_new_distance_to_loaded_features(dist)
 
 
