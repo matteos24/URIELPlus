@@ -398,12 +398,11 @@ class URIELPlusQuerying(BaseURIEL):
         else:
             langs = list(args)
 
-
+        
         unknown_langs = [lang for lang in langs if lang not in self.langs[0]]
         if unknown_langs:
             logging.error(f"Unknown languages: {', '.join(unknown_langs)}.")
             sys.exit(1)
-
 
         angular_distances_list = []
         for dist in distance_list:
@@ -435,7 +434,7 @@ class URIELPlusQuerying(BaseURIEL):
                 logging.info(f"[Wasserstein‐norm] {iso1}–{iso2} = {d:.3f}")
                 return d
             
-            
+
             loaded_features_idx = self.map_new_distance_to_loaded_features(dist)
 
 
