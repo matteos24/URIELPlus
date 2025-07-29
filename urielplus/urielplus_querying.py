@@ -416,9 +416,9 @@ class URIELPlusQuerying(BaseURIEL):
                 if not hasattr(self.databases, "geo_distributions"):
                     logging.error("Call integrate_ethnologue_geo() first!")
                     sys.exit(1)
-                iso1, iso2 = langs
-                d = w1_distance_language(iso1, iso2, self.databases.geo_distributions)
-                logging.info(f"[Wasserstein] {iso1}–{iso2} = {d:.3f}")
+                code1, code2 = langs
+                d = w1_distance_language(code1, code2, self.databases.geo_distributions)
+                logging.info(f"[Wasserstein] {code1}–{code2} = {d:.3f}")
 
                 return d
 
@@ -429,9 +429,9 @@ class URIELPlusQuerying(BaseURIEL):
                 if not hasattr(self.databases, "geo_distributions"):
                     logging.error("Call integrate_ethnologue_geo() first!")
                     sys.exit(1)
-                iso1, iso2 = langs
-                d = normalized_w1_distance(iso1, iso2, self.databases.geo_distributions)
-                logging.info(f"[Wasserstein‐norm] {iso1}–{iso2} = {d:.3f}")
+                code1, code2 = langs
+                d = normalized_w1_distance(code1, code2, self.databases.geo_distributions)
+                logging.info(f"[Wasserstein‐norm] {code1}–{code2} = {d:.3f}")
                 return d
             
 

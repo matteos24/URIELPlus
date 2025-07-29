@@ -7,7 +7,7 @@ geod = Geod(ellps="WGS84")
 
 def build_distributions(df):
     lang_distributions = {}
-    for iso, grp in df.groupby("ISO_639"):
+    for iso, grp in df.groupby("glottocode"):
         centroid = grp[["Centroid_Lon","Centroid_Lat"]].to_numpy(dtype="f8")
         weights   = grp["weight"].to_numpy(dtype="f8")
         lang_distributions[iso] = (centroid, weights)

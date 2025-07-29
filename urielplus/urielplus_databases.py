@@ -687,15 +687,23 @@ class URIELPlusDatabases(BaseURIEL):
         self.sources[idx] = np.array(["CSV_IMPORTED"])
     
 
-    def integrate_ethnologue_geo(self, merged_csv="database/urielplus_csvs/language_country_merged_data.csv"):
+    def integrate_ethnologue_geo(self, language_centroid_style):
         from .geo_wasserstein import build_distributions
         logging.error("RUNNING INTEGRATE")
-        path = os.path.join(self.cur_dir, merged_csv)
-        df = pd.read_csv(path)
+        df = {}
+        if (language_centroid_style == 0):
+            path = os.path.join(self.cur_dir, "database/urielplus_csvs/language_country_merged_data_old_coord.csv")
+            df = pd.read_csv(path)
+        elif (language_centroid_style == 1):
+            path = os.path.join(self.cur_dir, "database/urielplus_csvs/language_country_merged_data_new_coord.csv")
+            df = pd.read_csv(path)
+        else:
+            logging.error("Not Valid Language Centroid Style Input (Please Choose Either 0 or 1)")
+        
         # ensure the 4 necessary columns exist
-        expected = {"ISO_639","Centroid_Lon","Centroid_Lat","weight"}
+        expected = {"glottocode","Centroid_Lon","Centroid_Lat","weight"}
         if not expected.issubset(df.columns):
             missing = expected - set(df.columns)
-            raise ValueError(f"language_country_merged_data.csv is missing columns: {missing}")
+            raise ValueError(f"language_country_merged_data_new/old_coord.csv is missing columns: {missing}")
 
         self.geo_distributions = build_distributions(df)

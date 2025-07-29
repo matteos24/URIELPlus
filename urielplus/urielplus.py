@@ -329,8 +329,8 @@ class URIELPlus(URIELPlusDatabases, URIELPlusImputation, URIELPlusQuerying):
         """Returns the sources array of the geography loaded features."""
         return self.sources[2]
 
-    def integrate_ethnologue_geo(self, *a, **kw):
-        return self.databases.integrate_ethnologue_geo(*a,**kw)
+    def integrate_ethnologue_geo(self, language_centroid_style: int):
+        return self.databases.integrate_ethnologue_geo(language_centroid_style)
 
 
 
